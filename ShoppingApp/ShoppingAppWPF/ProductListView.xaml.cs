@@ -23,6 +23,7 @@ namespace ShoppingAppWPF
         public ProductListView()
         {
             InitializeComponent();
+            DataContext = new ProductListViewModel();
         }
     }
 }

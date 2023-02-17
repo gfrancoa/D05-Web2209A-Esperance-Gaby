@@ -41,7 +41,7 @@
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="ID" Binding="{Binding Path=Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Product name" Binding="{Binding Path=ProductName, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Product name" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" />
                 <DataGridTextColumn Header="Price [$]" Binding="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}" />
 
             </DataGrid.Columns>
@@ -52,15 +52,15 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="2. Set the amount you want to buy: "/>
                 <Separator/>
-            <Image Source="https://cdn11.bigcommerce.com/s-dz63h/images/stencil/2560w/products/2880/2207/Apple__30450.1442364015.jpg?c=2" MaxWidth="80" />
-            <Label Content="Product Title" HorizontalAlignment="Center" />
+            <Image Source="{Binding Path=ImageURL, UpdateSourceTrigger=PropertyChanged}" MaxWidth="80" />
+            <Label Content="{Binding Path=ProductName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Label Content="Price: $" />
-                <Label Content="0.00"/>
+                <Label Content="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}"/>
                 
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Content="-" Padding="10" FontSize="25" Width="40">
+                <Button Content="-" Padding="10" FontSize="25" Width="40" Command="{Binding Path=DecreaseQtyCommand}">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -68,9 +68,9 @@
                     </Button.Resources>
                 </Button>
                 <Separator/>
-                <Label Content="0" FontSize="20" Padding="20"/>
+                <Label Content="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Padding="20"/>
                 <Separator/>
-                <Button Content="+" Padding="10" FontSize="20" Width="40">
+                <Button Content="+" Padding="10" FontSize="20" Width="40" Command="{Binding Path=IncreaseQtyCommand}">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
