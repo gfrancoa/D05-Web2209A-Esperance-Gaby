@@ -1,0 +1,44 @@
+﻿<Window x:Class="LoginShopping.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:LoginShopping"
+        mc:Ignorable="d"
+        Title="Login" Height="760" Width="500"
+    TextElement.Foreground="{DynamicResource MaterialDesignBox}"
+        Background="{x:Null}"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+    
+    
+        
+            <StackPanel>
+              
+                    <StackPanel Margin="16 10 0 6" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock VerticalAlignment="Center" ToolTip="Dark Mode"/>
+          
+                    </StackPanel>  
+                    
+            
+                <Image Margin="0 60 0 5" Source="login.png" Height="100"/>
+                <TextBlock Margin="0 25 0 5" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" Text="Welcome Back!"/>
+                <TextBlock FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center" Text="Log in to your existing account"/>
+                <DockPanel>
+                    <StackPanel>
+                        <TextBox Margin="0 50 0 0" x:Name="txtUsername" Width="300" FontSize="18" Text="Enter Username" BorderThickness="2"/>
+                        
+                        <Button Content=" Login"/>
+                    </StackPanel>
+                    
+                </DockPanel>
+                
+
+            </StackPanel>
+    
+        
+    
+    
+</Window>
