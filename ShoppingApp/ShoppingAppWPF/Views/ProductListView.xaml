@@ -41,8 +41,9 @@
             <DataGrid.Columns>
 
                 <DataGridTextColumn Header="ID" Binding="{Binding Path=Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Product name" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Price [$]" Binding="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Category" Binding="{Binding Path=Category, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Price [$]" Binding="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
 
             </DataGrid.Columns>
         </DataGrid>
@@ -54,6 +55,7 @@
                 <Separator/>
             <Image Source="{Binding Path=ImageURL, UpdateSourceTrigger=PropertyChanged}" MaxWidth="80" />
             <Label Content="{Binding Path=ProductName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+            <Label Content="{Binding Path=ProductDescription, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Label Content="Price: $" />
                 <Label Content="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}"/>
