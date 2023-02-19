@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.DirectoryServices.ActiveDirectory;
 using System.Linq;
 using System.Text;
@@ -7,55 +8,84 @@ using System.Threading.Tasks;
 
 namespace ShoppingAppWPF.Models
 {
-    class Cart
+    public class Cart
     {
-        public Dictionary<int, Product> Products { get; }
-        private const double Tax = 0.15;
+        public ObservableCollection<Product> Products { get; }
+
+        private readonly Dictionary<int, Product> productsDictionary;
+        private const decimal Tax = 0.15m;
 
         public Cart()
         {
-            Products = new Dictionary<int, Product>();
+            Products = new ObservableCollection<Product>();
+            productsDictionary = new Dictionary<int, Product>();
         }
-        public void AddProduct(Product product) {
-            if (Products.ContainsKey(product.Id))
-                Products[product.Id] = product;
+
+        public void AddProductUnit(Product product)
+        {
+            if (productsDictionary.ContainsKey(product.Id))
+            {
+                if (product.Quantity < product.Inventory)
+                {
+                    product.Quantity++;
+                }
+            }
             else
-                Products.Add(product.Id, product);
-           
+            {
+                if (product.Inventory >= 1)
+                {
+                    product.Quantity = 1;
+                    Products.Add(product);
+                    productsDictionary.Add(product.Id, product);
+                }
+            }
         }
 
-        public void RemoveProduct(int id)
+        public void RemoveProductUnit(Product product)
         {
-            if (Products[id] != null)
-            Products.Remove(id);
+            if (productsDictionary.ContainsKey(product.Id))
+            {
+                if (product.Quantity > 1)
+                {
+                    product.Quantity--;
+                }
+                else
+                {
+                    product.Quantity = 0;
+                    Products.Remove(product);
+                    productsDictionary.Remove(product.Id);
+                }
+            }
         }
 
-        public void IncreaseProductQty(int id)
+        public void RemoveProduct(Product product)
         {
-            if (Products[id] != null)
-                Products[id].IncreaseQuantity();
-        }
-
-        public void DecreaseProductQty(int id)
-        {
-            if (Products[id] != null)
-                Products[id].DecreaseQuantity();
+            if (productsDictionary.ContainsKey(product.Id))
+            {
+                product.Quantity = 0;
+                Products.Remove(product);
+                productsDictionary.Remove(product.Id);
+            }
         }
 
         public void EmptyCart()
         {
+            foreach (Product product in Products)
+                product.Quantity = 0;
+
             Products.Clear();
+            productsDictionary.Clear();
         }
 
-        public double Subtotal
+        public decimal Subtotal
         {
             get
             {
-              return Products.Sum(x=>x.Value.TotalPrice);
+              return productsDictionary.Sum(x=>x.Value.TotalPrice);
             }
         }
 
-        public double TaxAmount
+        public decimal TaxAmount
         {
             get
             {
@@ -63,7 +93,7 @@ namespace ShoppingAppWPF.Models
             }
         }
 
-        public double Total
+        public decimal Total
         {
             get
             {

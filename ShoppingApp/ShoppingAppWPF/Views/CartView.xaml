@@ -6,7 +6,140 @@
              xmlns:local="clr-namespace:ShoppingAppWPF.Views"
              mc:Ignorable="d" 
              >
-    <Grid>
-        <Button Content="Submit" Click="OnBackButtonClicked"/>
-    </Grid>
+
+    <UserControl.Resources>
+        <Style TargetType="Separator">
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="MinWidth" Value="100" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Margin="20">
+        <StackPanel  HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <Image Source="https://cdn.dribbble.com/users/2057697/screenshots/11405073/media/7c71d0d51ef5a492c02043429bce5294.jpg" MaxWidth="100" />
+            <Label Content="Shopping Cart" FontSize="20"/>
+        </StackPanel>
+        
+        <DockPanel>
+            <Button Content="&lt;-- " Click="OnBackButtonClicked" DockPanel.Dock="Left" Background="Transparent">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Label Content="Hello," DockPanel.Dock="Left" />
+            <!--<Label Content="{Binding Path=FirstName, UpdateSourceTrigger=PropertyChanged}"/>-->
+            <Label Content="Fulanito" DockPanel.Dock="Left" />
+            <Button ToolTip="Logout" Background="Transparent" BorderThickness="0" DockPanel.Dock="Right">
+                <Image Source="https://cdn4.iconfinder.com/data/icons/gray-user-management/512/log_off-512.png" MaxWidth="20" />
+            </Button>
+            <Separator DockPanel.Dock="Left"/>
+        </DockPanel>
+
+        <Label Content="Select a product to edit the amount or remove it from the cart"/>
+
+        <DataGrid AutoGenerateColumns="False" SelectionMode="Single" ItemsSource="{Binding Path=Products}" SelectedItem="{Binding Path=SelectedProduct, UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=Id, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Unit Price [$]" Binding="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Total Price" Binding="{Binding Path=TotalPrice, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" />
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Separator/>
+
+        <StackPanel HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Right">
+                <Label Content="Subtotal $" />
+                <Label x:Name="subtotalCart" Content="{Binding Path=Subtotal, UpdateSourceTrigger=PropertyChanged}"  />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="Taxes (15%) $"  />
+                <Label x:Name="taxCart" Content="{Binding Path=TaxAmount, UpdateSourceTrigger=PropertyChanged}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="Total $" />
+                <Label x:Name="totalCart" Content="{Binding Path=Total, UpdateSourceTrigger=PropertyChanged}"  />
+            </StackPanel>
+            
+        </StackPanel>
+
+        <Separator/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Empty Cart" Padding="5" Command="{Binding Path=DeleteCartCommand}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Separator/>
+            <Button Content="Place Order" Padding="5" Command="{Binding Path=PlaceOrderCommand}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+        
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+           
+            <Separator/>
+            <Image Source="{Binding Path=ImageURL, UpdateSourceTrigger=PropertyChanged}" MaxWidth="80" />
+            <Label Content="{Binding Path=ProductName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+            <Label Content="{Binding Path=ProductDescription, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Price: $" />
+                <Label Content="{Binding Path=Price, UpdateSourceTrigger=PropertyChanged}"/>
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="-" Padding="10" FontSize="25" Width="40" Command="{Binding Path=DecreaseQtyCommand}">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Separator/>
+                <Label Content="{Binding Path=Quantity, UpdateSourceTrigger=PropertyChanged}" FontSize="20" Padding="20"/>
+                <Separator/>
+                <Button Content="+" Padding="10" FontSize="20" Width="40" Command="{Binding Path=IncreaseQtyCommand}">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+            </StackPanel>
+            <Separator/>
+            <Button Content="Remove from Cart" Padding="5" Command="{Binding Path=RemoveFromCartCommand}">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+        </StackPanel>
+
+        <Label  Content="{Binding Path=Message, UpdateSourceTrigger=PropertyChanged }"/>
+
+
+
+    </StackPanel>
 </UserControl>

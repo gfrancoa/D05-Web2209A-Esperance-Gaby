@@ -20,6 +20,9 @@ namespace ShoppingAppWPF.Views
 {
     public partial class ShoppingView : UserControl
     {
+        Cart cart;
+        ProductListViewModel productListViewModel;
+        CartViewModel cartViewModel;
         public ShoppingView()
         {
             InitializeComponent();
@@ -29,9 +32,12 @@ namespace ShoppingAppWPF.Views
 
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                Cart cart = new Cart();
-                productListView.DataContext = new ProductListViewModel(cart);
-                cartView.DataContext = new CartViewModel(cart);
+                cart = new Cart();
+                productListViewModel = new ProductListViewModel(cart);
+               cartViewModel = new CartViewModel(cart);
+               
+                productListView.DataContext = productListViewModel;
+                cartView.DataContext = cartViewModel;
             }
         }
 
@@ -39,6 +45,9 @@ namespace ShoppingAppWPF.Views
         {
             productListView.Visibility = Visibility.Collapsed;
             cartView.Visibility = Visibility.Visible;
+            cartViewModel.Subtotal = cart.Subtotal;
+            cartViewModel.Total = cart.Total;
+            cartViewModel.TaxAmount = cart.TaxAmount;
         }
 
         private void OnNavigateToProductListRequested()

@@ -55,16 +55,26 @@ namespace ShoppingAppWPF.ViewModels
                 
             } 
         }
-        public int Quantity { get; set; }
+        public int Quantity
+        {
+            get => quantity;
+            set
+            {
+                quantity = value;
+                NotifyPropertyChanged(nameof(Quantity));
+            }
+        }
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
-        public double Price { get; set; }
+        public decimal Price { get; set; }
         public string ImageURL { get; set; } 
 
         public int TotalQuantity { get; set; }
         public DelegateCommand IncreaseQtyCommand { get; }
         public DelegateCommand DecreaseQtyCommand { get; }
         public DelegateCommand AddToCartCommand { get; }
+
+        private int quantity;
 
         public ProductListViewModel(Cart cart) {
             repository = new ProductRepository();
@@ -82,9 +92,8 @@ namespace ShoppingAppWPF.ViewModels
         {
             if(SelectedProduct is not null)
             {
-                SelectedProduct.IncreaseQuantity();
+                ShoppingCart.AddProductUnit(SelectedProduct);
                 Quantity = SelectedProduct.Quantity;
-                NotifyPropertyChanged(nameof(Quantity));
             }
         }
 
@@ -92,9 +101,8 @@ namespace ShoppingAppWPF.ViewModels
         {
             if (SelectedProduct is not null)
             {
-                SelectedProduct.DecreaseQuantity();
+                ShoppingCart.RemoveProductUnit(SelectedProduct);
                 Quantity = SelectedProduct.Quantity;
-                NotifyPropertyChanged(nameof(Quantity));
             }
         }
 
@@ -102,9 +110,8 @@ namespace ShoppingAppWPF.ViewModels
         {
             if (SelectedProduct is not null)
             {
-                ShoppingCart.AddProduct(SelectedProduct);
-                SelectedProduct.ResetQuantity();
-                SelectedProduct = null;
+                ShoppingCart.AddProductUnit(SelectedProduct);
+                Quantity = SelectedProduct.Quantity;
             }
         }
     }

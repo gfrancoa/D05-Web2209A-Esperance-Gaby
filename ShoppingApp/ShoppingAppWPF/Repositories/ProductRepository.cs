@@ -25,7 +25,7 @@ namespace ShoppingAppWPF.Repositories
             string category = reader.GetString(1);
             string name = reader.GetString(2);
             string description = reader.GetString(3);
-            double price = reader.GetDouble(4);
+            decimal price = reader.GetDecimal(4);
             int inventory = reader.GetInt32(5);
             string imageUrl = reader.GetString(6);
 
