@@ -1,7 +1,5 @@
-﻿using ShoppingAppWPF.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,20 +15,18 @@ using System.Windows.Shapes;
 
 namespace ShoppingAppWPF.Views
 {
-    public delegate void NavigationHandler();
-
-    public partial class ProductListView : UserControl
+    public partial class CartView : UserControl
+        
     {
-        public event NavigationHandler NavigateToCartRequested;
-
-        public ProductListView()
+        public event NavigationHandler NavigateToProductListRequested;
+        public CartView()
         {
             InitializeComponent();
         }
 
-        private void OnCartButtonClicked(object sender, RoutedEventArgs e)
+        private void OnBackButtonClicked(object sender, RoutedEventArgs e)
         {
-            NavigateToCartRequested?.Invoke();
+            NavigateToProductListRequested?.Invoke();
         }
     }
 }

@@ -46,6 +46,11 @@ namespace ShoppingAppWPF.Models
                 Quantity++;
         }
 
+        public void ResetQuantity()
+        {
+            Quantity = 0;
+        }
+
         public void DecreaseQuantity()
         {
             if(Quantity>0)

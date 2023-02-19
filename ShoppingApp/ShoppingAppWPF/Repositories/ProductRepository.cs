@@ -3,6 +3,7 @@ using ShoppingAppWPF.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,6 +53,25 @@ namespace ShoppingAppWPF.Repositories
                 products.Add(ReadNextProduct(reader));
             }
             return products;
+        }
+
+        public bool UpdateProductInventory(int id, int quantity)
+        {
+            using SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+
+            using SqlCommand command = connection.CreateCommand();
+
+            command.CommandText = "UPDATE dbo.Products" +
+                " SET Inventory=@Inventory" +
+                " WHERE Id=@Id";
+
+            command.Parameters.Add("@Id", System.Data.SqlDbType.Int).Value = id;
+            command.Parameters.Add("@Inventory", SqlDbType.Int).Value = quantity;
+            command.Parameters.Add("@DateUpdated", SqlDbType.NVarChar).Value = DateTime.UtcNow;
+
+            int rowsAffected = command.ExecuteNonQuery();
+            return rowsAffected > 0;
         }
     }
 }

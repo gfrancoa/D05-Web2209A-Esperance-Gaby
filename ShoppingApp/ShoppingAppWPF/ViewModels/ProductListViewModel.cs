@@ -16,6 +16,8 @@ namespace ShoppingAppWPF.ViewModels
     {
         public ObservableCollection<Product> Products { get; }
 
+        public Cart ShoppingCart { get; set; }
+
         private ProductRepository repository;
 
         private Product selectedProduct;
@@ -30,16 +32,27 @@ namespace ShoppingAppWPF.ViewModels
             set
             {
                 selectedProduct= value;
-                Quantity= selectedProduct.Quantity;
-                ProductName = selectedProduct.Name;
-                ProductDescription = selectedProduct.Description;
-                ImageURL = selectedProduct.ImageUrl;
-                Price = selectedProduct.Price;
-                NotifyPropertyChanged(nameof(Quantity));
-                NotifyPropertyChanged(nameof(ProductName));
-                NotifyPropertyChanged(nameof(ProductDescription));
-                NotifyPropertyChanged(nameof(ImageURL));
-                NotifyPropertyChanged(nameof(Price));
+                if (selectedProduct != null)
+                {
+                    Quantity = selectedProduct.Quantity;
+                    ProductName = selectedProduct.Name;
+                    ProductDescription = selectedProduct.Description;
+                    ImageURL = selectedProduct.ImageUrl;
+                    Price = selectedProduct.Price;
+                } else
+                {
+                    Quantity = 0;
+                    ProductName = null;
+                    ProductDescription = null;
+                    ImageURL = null;
+                    Price = 0;
+                }
+                    NotifyPropertyChanged(nameof(Quantity));
+                    NotifyPropertyChanged(nameof(ProductName));
+                    NotifyPropertyChanged(nameof(ProductDescription));
+                    NotifyPropertyChanged(nameof(ImageURL));
+                    NotifyPropertyChanged(nameof(Price));
+                
             } 
         }
         public int Quantity { get; set; }
@@ -53,7 +66,7 @@ namespace ShoppingAppWPF.ViewModels
         public DelegateCommand DecreaseQtyCommand { get; }
         public DelegateCommand AddToCartCommand { get; }
 
-        public ProductListViewModel() {
+        public ProductListViewModel(Cart cart) {
             repository = new ProductRepository();
             List<Product> productList = repository.GetProducts();
             Products = new ObservableCollection<Product>(productList); 
@@ -61,6 +74,8 @@ namespace ShoppingAppWPF.ViewModels
             IncreaseQtyCommand = new DelegateCommand(IncreaseQty);
             DecreaseQtyCommand = new DelegateCommand(DecreaseQty);
             AddToCartCommand = new DelegateCommand(AddToCart);
+
+            ShoppingCart = cart ?? throw new ArgumentNullException(nameof(cart));
         }
 
         private void IncreaseQty(object _)
@@ -85,7 +100,12 @@ namespace ShoppingAppWPF.ViewModels
 
         private void AddToCart(object _)
         {
-
+            if (SelectedProduct is not null)
+            {
+                ShoppingCart.AddProduct(SelectedProduct);
+                SelectedProduct.ResetQuantity();
+                SelectedProduct = null;
+            }
         }
     }
 }
