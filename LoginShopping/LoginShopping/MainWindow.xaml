@@ -4,42 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:local="clr-namespace:LoginShopping"
+        xmlns:local="clr-namespace:LoginShopping" xmlns:Views="clr-namespace:LoginShopping.Views"
         mc:Ignorable="d"
-        Title="Login" Height="760" Width="500"
-    TextElement.Foreground="{DynamicResource MaterialDesignBox}"
-        Background="AliceBlue"
-        AllowsTransparency="True"
-        WindowStyle="None"
-        WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="550" Width="450">
 
-    <DockPanel>
-         <StackPanel>
-              
-                    <StackPanel Margin="16 10 0 6" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock VerticalAlignment="Center" ToolTip="Dark Mode"/>
-                <Image Margin="0 60 0 5" Source="login.png" Height="100"/>
-            </StackPanel>  
-             
-                
-                <TextBlock Margin="0 25 0 5" HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" Text="Welcome Back!"/>
-                <TextBlock FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center" Text="Log in to your existing account"/>
-                <DockPanel>
-                    <StackPanel>
-                    <TextBox Margin="0 50 0 0" x:Name="txtUsername" Width="300" FontSize="18" Text="Enter Username" BorderThickness="2"/>
-                    <TextBox Margin="0 50 0 0" x:Name="txtPassword" Width="300" FontSize="18" Text="Enter Password" BorderThickness="2"/>
-
-                    <Button Margin="0 20 0 0" x:Name="loginBtn" materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="53" Width="200" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18"  Content=" Login"/>
-                    <Button Margin="0 20 0 0" x:Name="signBtn" materialDesign:ShadowAssist.ShadowDepth="Depth0" Height="53" Width="200" materialDesign:ButtonAssist.CornerRadius="10" FontSize="18" Content="Create account"/>
-
-                </StackPanel>
-                    
-                </DockPanel>
-                
-
-         </StackPanel>
-
-     </DockPanel>
-        
+    <Grid>
+           
+   
+    </Grid>
+   
     
 </Window>

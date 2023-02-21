@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,31 +16,13 @@ using System.Windows.Shapes;
 namespace LoginShopping.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoginView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginView : UserControl
     {
-        private object splcon;
-
-        public MainWindow()
+        public LoginView()
         {
             InitializeComponent();
-        }
-
-        private void InitializeComponent()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void loginBtn_Click(object sender, RoutedEventArgs e)
-        {
-            
-
-        }
-
-        private void signBtn_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
