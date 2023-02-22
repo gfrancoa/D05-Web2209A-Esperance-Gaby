@@ -30,5 +30,9 @@ FROM dbo.Products
 
 CREATE TABLE Users(
 	Id int NOT NULL PRIMARY KEY CLUSTERED IDENTITY(1000001,1),
+	FirstName nvarchar(MAX) NOT NULL,
+	LastName nvarchar(MAX) NOT NULL,
+	Username nvarchar(MAX) NOT NULL,
+	Password nvarchar(MAX) NOT NULL
 )
 
