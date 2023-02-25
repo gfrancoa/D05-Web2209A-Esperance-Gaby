@@ -19,7 +19,9 @@ No optional features were implemented in this project
 -The quantity of the inventory is not being updated when clicking on "Send order"
 
 
-TEST USERS
+### TEST USERS⚙️
 gfrancoa pass123*
+
 ssmith light123*
+
 anon123 anon123*
