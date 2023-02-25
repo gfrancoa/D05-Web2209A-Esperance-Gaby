@@ -11,10 +11,9 @@ In the files a .sql file was attached to create the store database and product t
 No optional features were implemented in this project
 
 ### Bug list 🐛
--The login is missing to be integrated with the other two views.
-
--Login integration with database is missing
 
 -Code is being repeated in product list and shopping cart views. The product details is not a separate component
 
 -The usernames in user database are not set as unique
+
+-The quantity of the inventory is not being updated when clicking on "Send order"
