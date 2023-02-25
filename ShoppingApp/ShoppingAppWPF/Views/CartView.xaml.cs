@@ -19,6 +19,7 @@ namespace ShoppingAppWPF.Views
         
     {
         public event NavigationHandler NavigateToProductListRequested;
+        public event NavigationHandler NavigateToLoginRequested;
         public CartView()
         {
             InitializeComponent();
@@ -27,6 +28,11 @@ namespace ShoppingAppWPF.Views
         private void OnBackButtonClicked(object sender, RoutedEventArgs e)
         {
             NavigateToProductListRequested?.Invoke();
+        }
+
+        private void OnLogoutButtonClicked(object sender, RoutedEventArgs e)
+        {
+            NavigateToLoginRequested?.Invoke();
         }
     }
 }

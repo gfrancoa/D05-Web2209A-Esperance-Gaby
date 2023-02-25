@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:ShoppingAppWPF.Views"
              mc:Ignorable="d">
     <DockPanel>
-        <local:ProductListView x:Name="productListView" x:FieldModifier="private" Visibility="Visible"/>
+        <local:LoginView x:Name="loginView" x:FieldModifier="private" Visibility="Visible"/>
+        <local:ProductListView x:Name="productListView" x:FieldModifier="private" Visibility="Collapsed"/>
         <local:CartView x:Name="cartView" x:FieldModifier="private" Visibility="Collapsed"/>
     </DockPanel>
 </UserControl>

@@ -24,9 +24,8 @@
         </StackPanel>
         <DockPanel>
             <Label Content="Hello," DockPanel.Dock="Left" />
-            <!--<Label Content="{Binding Path=FirstName, UpdateSourceTrigger=PropertyChanged}"/>-->
-            <Label Content="Fulanito" DockPanel.Dock="Left" />
-            <Button ToolTip="Logout" Background="Transparent" BorderThickness="0" DockPanel.Dock="Right">
+            <Label Content="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button ToolTip="Logout" Background="Transparent" BorderThickness="0" DockPanel.Dock="Right" Click="OnLogoutButtonClicked">
                 <Image Source="https://cdn4.iconfinder.com/data/icons/gray-user-management/512/log_off-512.png" MaxWidth="20" />
             </Button>
             <Button Click="OnCartButtonClicked" ToolTip="Shopping Cart" Background="Transparent" BorderThickness="0" DockPanel.Dock="Right">

@@ -22,6 +22,21 @@ namespace ShoppingAppWPF.ViewModels
 
         private Product selectedProduct;
 
+        private string name;
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+                NotifyPropertyChanged(nameof(Name));
+            }
+
+        }
+
         public Product SelectedProduct 
         {
             get
@@ -76,7 +91,7 @@ namespace ShoppingAppWPF.ViewModels
 
         private int quantity;
 
-        public ProductListViewModel(Cart cart) {
+        public ProductListViewModel(Cart cart,User user) {
             repository = new ProductRepository();
             List<Product> productList = repository.GetProducts();
             Products = new ObservableCollection<Product>(productList); 
@@ -86,6 +101,8 @@ namespace ShoppingAppWPF.ViewModels
             AddToCartCommand = new DelegateCommand(AddToCart);
 
             ShoppingCart = cart ?? throw new ArgumentNullException(nameof(cart));
+
+            Name = user.Name;
         }
 
         private void IncreaseQty(object _)

@@ -1,7 +1,6 @@
 ﻿using ShoppingAppWPF.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,26 +16,25 @@ using System.Windows.Shapes;
 
 namespace ShoppingAppWPF.Views
 {
-    public delegate void NavigationHandler();
-
-    public partial class ProductListView : UserControl
+    /// <summary>
+    /// Interaction logic for LoginView.xaml
+    /// </summary>
+    public partial class LoginView : UserControl
     {
-        public event NavigationHandler NavigateToCartRequested;
-        public event NavigationHandler NavigateToLoginRequested;
-
-        public ProductListView()
+        public event NavigationHandler NavigateToProductFromLoginRequested;
+        public LoginView()
         {
             InitializeComponent();
         }
 
-        private void OnCartButtonClicked(object sender, RoutedEventArgs e)
+        private void OnLoginButtonClicked(object sender, RoutedEventArgs e)
         {
-            NavigateToCartRequested?.Invoke();
+            NavigateToProductFromLoginRequested?.Invoke();
         }
 
-        private void OnLogoutButtonClicked(object sender, RoutedEventArgs e)
+        private void OnPasswordChanged(object sender, RoutedEventArgs e)
         {
-            NavigateToLoginRequested?.Invoke();
+            ((LoginViewModel)this.DataContext).Password = ((PasswordBox)sender).Password;
         }
     }
 }

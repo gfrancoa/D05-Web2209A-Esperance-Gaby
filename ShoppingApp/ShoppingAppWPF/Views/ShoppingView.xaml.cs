@@ -21,29 +21,38 @@ namespace ShoppingAppWPF.Views
     public partial class ShoppingView : UserControl
     {
         Cart cart;
+        User user;
         ProductListViewModel productListViewModel;
         CartViewModel cartViewModel;
+        LoginViewModel loginViewModel;
         public ShoppingView()
         {
             InitializeComponent();
 
             productListView.NavigateToCartRequested += OnNavigateToCartRequested;
+            productListView.NavigateToLoginRequested += OnNavigateToLoginRequested;
             cartView.NavigateToProductListRequested += OnNavigateToProductListRequested;
+            cartView.NavigateToLoginRequested += OnNavigateToLoginRequested;
+            loginView.NavigateToProductFromLoginRequested += OnNavigateToProductListRequested;
 
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
                 cart = new Cart();
-                productListViewModel = new ProductListViewModel(cart);
-               cartViewModel = new CartViewModel(cart);
+                user = new User();
+                productListViewModel = new ProductListViewModel(cart,user);
+                cartViewModel = new CartViewModel(cart,user);
+                loginViewModel = new LoginViewModel(user,OnNavigateToProductListRequested,loginView);
                
                 productListView.DataContext = productListViewModel;
                 cartView.DataContext = cartViewModel;
+                loginView.DataContext = loginViewModel;
             }
         }
 
         private void OnNavigateToCartRequested()
         {
             productListView.Visibility = Visibility.Collapsed;
+            loginView.Visibility = Visibility.Collapsed;
             cartView.Visibility = Visibility.Visible;
             cartViewModel.Subtotal = cart.Subtotal;
             cartViewModel.Total = cart.Total;
@@ -54,6 +63,16 @@ namespace ShoppingAppWPF.Views
         {
             productListView.Visibility = Visibility.Visible;
             cartView.Visibility = Visibility.Collapsed;
+            loginView.Visibility = Visibility.Collapsed;
+            productListViewModel.Name= loginViewModel.Name;
+            cartViewModel.Name= loginViewModel.Name;
+        }
+
+        private void OnNavigateToLoginRequested()
+        {
+            productListView.Visibility = Visibility.Collapsed;
+            cartView.Visibility = Visibility.Collapsed;
+            loginView.Visibility = Visibility.Visible;
         }
     }
 }

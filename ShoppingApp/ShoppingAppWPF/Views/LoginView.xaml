@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="ShoppingAppWPF.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ShoppingAppWPF.Views"
+             mc:Ignorable="d" 
+            >
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <Image Source="https://cdn.dribbble.com/users/2057697/screenshots/11405073/media/7c71d0d51ef5a492c02043429bce5294.jpg" MaxWidth="100" />
+        </StackPanel>
+
+        <DockPanel Margin="15" Background="AliceBlue">
+            <StackPanel Margin="30">
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <TextBlock VerticalAlignment="Center" />
+
+                </StackPanel>
+
+
+                <TextBlock HorizontalAlignment="Center" FontSize="28" FontWeight="Bold" Text="Welcome Back!"/>
+                <TextBlock FontSize="17" FontWeight="SemiBold" HorizontalAlignment="Center" Text="Log in to your existing account"/>
+                <DockPanel>
+                    <StackPanel>
+                        <StackPanel HorizontalAlignment="Center">
+                            <Label Content="Username" Margin="10" FontSize="18" HorizontalAlignment="Center" Width="250" />
+                            <TextBox x:Name="txtUsername" Width="250" FontSize="18" Text="{Binding Path=Username}"  BorderThickness="2"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <Label Content="Password" Margin="10" FontSize="18" HorizontalAlignment="Center" Width="250" />
+                            <PasswordBox  Width="250" FontSize="18" x:Name="passwordBox"
+    PasswordChanged="OnPasswordChanged" BorderThickness="2"/>
+                        </StackPanel>
+
+
+                        <Button Margin="0 20 0 0" x:Name="loginBtn" Command="{Binding Path=LoginCommand}" Height="53" Width="200" FontSize="18"  Content=" Login"/>
+
+                        <TextBox Text="{Binding Path=Message, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" FontWeight="Bold" Foreground="Red" />
+                    </StackPanel>
+
+                </DockPanel>
+
+
+            </StackPanel>
+
+        </DockPanel>
+    </StackPanel>
+   
+</UserControl>

@@ -11,9 +11,23 @@ using System.Threading.Tasks;
 
 namespace ShoppingAppWPF.ViewModels
 {
-    class CartViewModel:ViewModel
+    class CartViewModel : ViewModel
     {
         private Cart cart;
+        private string name;
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
+                NotifyPropertyChanged(nameof(Name));
+            }
+
+        }
         public ObservableCollection<Product> Products { get; }
 
         private Product selectedProduct;
@@ -66,11 +80,11 @@ namespace ShoppingAppWPF.ViewModels
         private decimal subtotal;
         public decimal Subtotal
         {
-            get  => subtotal;
+            get => subtotal;
             set
             {
                 subtotal = value;
-                NotifyPropertyChanged(nameof(Subtotal));    
+                NotifyPropertyChanged(nameof(Subtotal));
             }
         }
 
@@ -107,9 +121,10 @@ namespace ShoppingAppWPF.ViewModels
 
         private int quantity;
 
-        public CartViewModel(Cart cart)
+        public CartViewModel(Cart cart, User user)
         {
             Products = cart.Products;
+            Name = user.Name;
 
             IncreaseQtyCommand = new DelegateCommand(IncreaseQty);
             DecreaseQtyCommand = new DelegateCommand(DecreaseQty);
@@ -151,7 +166,8 @@ namespace ShoppingAppWPF.ViewModels
             }
         }
 
-        private void RemoveFromCart(object _) {
+        private void RemoveFromCart(object _)
+        {
             Product selectedProduct = SelectedProduct;
             cart.RemoveProduct(selectedProduct);
             Quantity = selectedProduct.Quantity;
@@ -163,7 +179,8 @@ namespace ShoppingAppWPF.ViewModels
             NotifyPropertyChanged(nameof(TaxAmount));
 
         }
-        private void DeleteCart(object _) {
+        private void DeleteCart(object _)
+        {
             cart.EmptyCart();
             Subtotal = cart.Subtotal;
             TaxAmount = cart.TaxAmount;
@@ -174,7 +191,8 @@ namespace ShoppingAppWPF.ViewModels
             NotifyPropertyChanged(nameof(Total));
             NotifyPropertyChanged(nameof(TaxAmount));
         }
-        private void PlaceOrder(object _) {
+        private void PlaceOrder(object _)
+        {
             cart.EmptyCart();
             Subtotal = cart.Subtotal;
             TaxAmount = cart.TaxAmount;
